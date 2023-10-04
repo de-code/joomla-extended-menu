@@ -13,6 +13,12 @@ joomla-install:
 		--db-pass=db_root_password
 
 
+joomla-install-extension:
+	docker-compose exec -T joomla \
+		php cli/joomla.php extension:install \
+		--path=/source/dist/exmenu.zip
+
+
 joomla-enable-debug:
 	docker-compose exec -T joomla \
 		sed -i \

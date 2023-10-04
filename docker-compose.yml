@@ -12,6 +12,8 @@ services:
     environment:
       JOOMLA_DB_HOST: joomladb
       JOOMLA_DB_PASSWORD: db_root_password
+    volumes:
+      - .:/source
 
   joomladb:
     image: mysql:5.6
