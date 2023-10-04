@@ -21,9 +21,7 @@ joomla-install-extension:
 
 joomla-enable-debug:
 	docker-compose exec -T joomla \
-		sed -i \
-		-e 's/$debug = false;/$debug = true;/g' \
-		configuration.php
+		php cli/joomla.php config:set debug=true
 
 
 joomla-install-if-not-installed:
