@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  joomla:
+    depends_on:
+      - joomladb
+    image: joomla:4.3.4
+    links:
+      - joomladb:mysql
+    ports:
+      - 8080:80
+    environment:
+      JOOMLA_DB_HOST: joomladb
+      JOOMLA_DB_PASSWORD: db_root_password
+
+  joomladb:
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: db_root_password
+
+  wait-for-it:
+    image: willwill/wait-for-it
