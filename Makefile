@@ -13,6 +13,13 @@ joomla-install:
 		--db-pass=db_root_password
 
 
+joomla-enable-debug:
+	docker-compose exec -T joomla \
+		sed -i \
+		-e 's/$debug = false;/$debug = true;/g' \
+		configuration.php
+
+
 joomla-install-if-not-installed:
 	@if docker-compose exec -T joomla test -e installation; then \
 		$(MAKE) joomla-install; \
