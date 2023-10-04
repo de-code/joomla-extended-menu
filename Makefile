@@ -35,5 +35,13 @@ joomla-start-and-wait:
 	$(MAKE) joomla-install-if-not-installed
 
 
+extension-zip:
+	mkdir -p dist
+	zip -r dist/exmenu.zip \
+		mod_exmenu.* \
+		exmenu \
+		LICENSE
+
+
 clean:
 	docker-compose down -v
