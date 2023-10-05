@@ -9,6 +9,8 @@
 * Beside this it were havily redesigned to separate module from view.
 */
 
+defined('_JEXEC') or die();
+
 if ((!defined('_VALID_MOS')) && (!defined('_JEXEC'))) {
 	if (isset($_POST['url'])) {
 		// redirect to url (used for select list)
