@@ -82,7 +82,7 @@ joomla-start-and-wait:
 
 joomla-check-site-okay:
 	docker-compose exec -T joomla \
-		curl --fail http://localhost:80
+		curl --fail --output /dev/null http://localhost:80
 
 
 stop:
