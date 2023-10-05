@@ -16,7 +16,7 @@ if (!defined('EXTENDED_MENU_HOME')) {
 
 use Joomla\Registry\Registry;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
-
+use Joomla\CMS\Router\Route;
 
 /**
  * Abstract class for all menu nodes.
@@ -280,22 +280,14 @@ class AbstractExtendedMenuView {
 		if (!$gotFinalLink) {
 			$shouldSefLink = ((strcasecmp(substr($menuNode->link, 0, 4), 'http') != 0) &&
 					(strcasecmp(substr($menuNode->link, 0, 1), '#') != 0));
-			if (class_exists('JRoute')) {
-				if ($shouldSefLink) {
-					if (!is_object($menuItemParameters)) {
-						$menuItemParameters = $this->getParsedParameters($menuItemParametersString);
-					}
-					$secure = $menuItemParameters->def('secure', 0);
-					$menuNode->link = JRoute::_($menuNode->link, true, $secure);
-				} else {
-					$menuNode->link = ampReplace($menuNode->link);
+			if ($shouldSefLink) {
+				if (!is_object($menuItemParameters)) {
+					$menuItemParameters = $this->getParsedParameters($menuItemParametersString);
 				}
+				$secure = $menuItemParameters->def('secure', 0);
+				$menuNode->link = Route::_($menuNode->link, true, $secure);
 			} else {
 				$menuNode->link = ampReplace($menuNode->link);
-				if ($shouldSefLink) {
-					// no secure link support for older versions
-					$menuNode->link = sefRelToAbs($menuNode->link);
-				}
 			}
 		}
 
