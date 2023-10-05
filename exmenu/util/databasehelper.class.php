@@ -15,6 +15,9 @@ if (!defined('EXTENDED_MENU_HOME')) {
 }
 
 
+use Joomla\CMS\Factory;
+
+
 class AbstractExtendedMenuDatabaseHelper {
 
 	var $_database = NULL;
@@ -24,7 +27,7 @@ class AbstractExtendedMenuDatabaseHelper {
 
 	function __construct() {
 		if (function_exists('jimport')) {
-			$this->_database = JFactory::getDBO();
+			$this->_database = Factory::getDBO();
 		} else {
 			$this->_database = $GLOBALS['database'];
 		}
@@ -83,7 +86,7 @@ class AbstractExtendedMenuDatabaseHelper {
 		if (is_null($this->sqlNow)) {
 			$offset = 0;
 			if (function_exists('jimport')) {
-				$now = JFactory::getDate();
+				$now = Factory::getDate();
 				if (method_exists($now, 'toSql')) {
 					$this->sqlNow = $now->toSql();
 				} else {
@@ -153,30 +156,8 @@ class AbstractExtendedMenuDatabaseHelper {
 
 	function getUserAccessIds() {
 		$siteHelper = de_siteof_exmenu_SiteHelper::getInstance();
-		if ($siteHelper->isJoomla16()) {
-			$user = JFactory::getUser();
-			return $user->getAuthorisedViewLevels();
-		} else {
-			// in Joomla 1.5 and below we only have a single user access id
-			// this effectively means everything from 0 up to that id is included
-			$id = 0;
-			if (class_exists('JFactory')) {
-				$user = JFactory::getUser();
-				if (is_object($user)) {
-					$id = intval($user->get('aid'));
-				}
-			} else if (isset($GLOBALS['my'])) {
-				$user = $GLOBALS['my'];
-				if (is_object($user)) {
-					$id = intval($user->gid);
-				}
-			}
-			$result = array();
-			for ($currentId = 0; $currentId <= $id; $currentId++) {
-				$result[] = $currentId;
-			}
-			return $result;
-		}
+		$user = Factory::getUser();
+		return $user->getAuthorisedViewLevels();
 	}
 }
 

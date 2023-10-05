@@ -9,11 +9,15 @@
 
 defined('_JEXEC') or die();
 
+
+use Joomla\CMS\Factory;
+
+
 class modExmenuHelper {
 	public static function getAjax() {
 		// Get module parameters
 		jimport('joomla.application.module.helper');
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$url  = $app->input->get('url');
 		if ($url != '') {
 			$app->redirect($url);
