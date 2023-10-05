@@ -14,6 +14,10 @@ if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
 }
 
+
+use Joomla\CMS\Plugin\PluginHelper;
+
+
 /**
  * @since 1.0.0
  */
@@ -27,7 +31,7 @@ class PluginExtendedMenuLoader extends AbstractExtendedMenuLoader {
 		$results = FALSE;
 		$pluginName	= implode(',', $sourceValues);
 		if (function_exists('jimport')) {
-			JPluginHelper::importPlugin('exmenu');
+			PluginHelper::importPlugin('exmenu');
 			$dispatcher = JDispatcher::getInstance();
 			$results = $dispatcher->trigger('onLoadMenu', array($this, $pluginName));
 		} else {
