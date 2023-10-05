@@ -48,11 +48,7 @@ class AbstractExtendedMenuDatabaseHelper {
 	 */
 	function getSqlQuote($text) {
 		$database = $this->getDatabase();
-		if (method_exists($database, 'quote')) {
-			return $database->quote($text);
-		} else {
-			return '\''.mysql_escape_string($text).'\'';
-		}
+		return $database->quote($text);
 	}
 
 	function checkDatabaseError($msg = '') {
