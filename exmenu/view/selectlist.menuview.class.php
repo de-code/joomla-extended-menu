@@ -7,6 +7,8 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
+defined('_JEXEC') or die();
+
 // no direct access
 if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
@@ -19,13 +21,7 @@ class SelectListExtendedMenuView extends AbstractExtendedMenuView {
 
 	function renderAsString($menuNodeList, $level = 0) {
 		$siteHelper = $this->getSiteHelper();
-		$action	= FALSE;
-		if (function_exists('jimport')) {
-//			$action	= $siteHelper->getUri('modules/mod_exmenu-j15/mod_exmenu.php');
-			$action	= $siteHelper->getUri('modules/mod_exmenu/mod_exmenu.php');
-		} else {
-			$action	= $siteHelper->getUri('modules/mod_exmenu.php');
-		}
+        $action	= $siteHelper->getUri('index.php?option=com_ajax&module=exmenu&format=raw');
 		$result = '';
 		$params = $this->params;
 		$autoHideSelectButton = ($params->def('select_list_submit_hide', '0') == 'autohide');

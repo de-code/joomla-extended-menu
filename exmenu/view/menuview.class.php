@@ -7,11 +7,16 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
+defined('_JEXEC') or die();
+
 // no direct access
 if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
 }
 
+use Joomla\Registry\Registry;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
+use Joomla\CMS\Router\Route;
 
 /**
  * Abstract class for all menu nodes.
@@ -161,15 +166,7 @@ class AbstractExtendedMenuView {
 	 * @since 1.0.5
 	 */
 	function getParsedParameters($text) {
-		$result = NULL;
-		if (class_exists('JParameter')) {
-			$result = new JParameter($text);
-		} else if (class_exists('JRegistry')) {
-			$result = new JRegistry($text);
-		} else {
-			$result = new mosParameters($text);
-		}
-		return $result;
+		return new Registry($text);
 	}
 
 
@@ -204,7 +201,7 @@ class AbstractExtendedMenuView {
 						$contentId = $temp[1];
 						if (function_exists('jimport')) {
 							require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
-							$menuNode->link = ContentHelperRoute::getArticleRoute(
+							$menuNode->link = RouteHelper::getArticleRoute(
 									$contentId, $menuNode->getCategoryId(), $menuNode->getSectionId());
 							$gotFinalLink = FALSE;
 							$id = FALSE;
@@ -283,22 +280,14 @@ class AbstractExtendedMenuView {
 		if (!$gotFinalLink) {
 			$shouldSefLink = ((strcasecmp(substr($menuNode->link, 0, 4), 'http') != 0) &&
 					(strcasecmp(substr($menuNode->link, 0, 1), '#') != 0));
-			if (class_exists('JRoute')) {
-				if ($shouldSefLink) {
-					if (!is_object($menuItemParameters)) {
-						$menuItemParameters = $this->getParsedParameters($menuItemParametersString);
-					}
-					$secure = $menuItemParameters->def('secure', 0);
-					$menuNode->link = JRoute::_($menuNode->link, true, $secure);
-				} else {
-					$menuNode->link = ampReplace($menuNode->link);
+			if ($shouldSefLink) {
+				if (!is_object($menuItemParameters)) {
+					$menuItemParameters = $this->getParsedParameters($menuItemParametersString);
 				}
+				$secure = $menuItemParameters->def('secure', 0);
+				$menuNode->link = Route::_($menuNode->link, true, $secure);
 			} else {
 				$menuNode->link = ampReplace($menuNode->link);
-				if ($shouldSefLink) {
-					// no secure link support for older versions
-					$menuNode->link = sefRelToAbs($menuNode->link);
-				}
 			}
 		}
 

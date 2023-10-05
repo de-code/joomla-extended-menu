@@ -7,11 +7,16 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
+defined('_JEXEC') or die();
+
 // no direct access
 if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
 }
 
+
+use Joomla\CMS\Factory;
+use Joomla\CMS\Version;
 
 class de_siteof_exmenu_SiteHelper {
 
@@ -28,8 +33,8 @@ class de_siteof_exmenu_SiteHelper {
 
 	private function __construct() {
 		if (function_exists('jimport')) {
-			$version = new JVersion();
-			$application = JFactory::getApplication();
+			$version = new Version();
+			$application = Factory::getApplication();
 			$this->_joomla15 = TRUE;
 			$this->_joomla16 = ($version->getShortVersion() >= '1.6');
 			$this->_joomla30 = ($version->getShortVersion() >= '3.0');
@@ -37,11 +42,7 @@ class de_siteof_exmenu_SiteHelper {
 			$this->_absolutePath = JPATH_SITE;
 			$this->_rootUri = JURI::root();
 			$this->_siteTemplate = ''.$application->getTemplate();
-            if ($this->_joomla40) {
-                $this->_currentMenuId = $application->getInput()->getInt('Itemid');
-            } else {
-			    $this->_currentMenuId = JRequest::getInt('Itemid');
-            }
+			$this->_currentMenuId = $application->getInput()->getInt('Itemid');
 		} else {
 			$this->_absolutePath = $GLOBALS['mosConfig_absolute_path'];
 			$this->_rootUri = $GLOBALS['mosConfig_live_site'];

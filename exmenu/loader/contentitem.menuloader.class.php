@@ -7,6 +7,8 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
+defined('_JEXEC') or die();
+
 // no direct access
 if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
@@ -78,7 +80,7 @@ class ContentItemExtendedMenuLoader extends ExtendedMenuLoader {
 		$menuNode->type = $this->contentItemLinkType;
 		if ($this->isJoomla15()) {
 			// Note: this link may never be used because the menu view will call
-			//   ContentHelperRoute::getArticleRoute(...)
+			//   RouteHelper::getArticleRoute(...)
 			$menuNode->link = 'index.php?option=com_content&view=article&id='.$id;
 		} else {
 			$menuNode->link = 'index.php?option=com_content&task='.$this->getTaskByLinkType($this->contentItemLinkType).'&id='.$id;

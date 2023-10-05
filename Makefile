@@ -27,6 +27,11 @@ joomla-enable-debug:
 		php cli/joomla.php config:set debug=true
 
 
+joomla-increase-session-timeout:
+	docker-compose exec -T joomla \
+		php cli/joomla.php config:set lifetime=60
+
+
 joomla-db-shell:
 	docker-compose exec joomladb mysql \
 		-u root \
@@ -50,12 +55,20 @@ joomla-link-extension-source:
 		'
 
 
+joomla-install-jed-checker:
+	docker-compose exec -T joomla \
+		php cli/joomla.php extension:install \
+		--url=https://github.com/joomla-extensions/jedchecker/archive/refs/tags/2.4.3.zip
+
+
 joomla-install:
 	$(MAKE) extension-zip
 	$(MAKE) joomla-install-core
 	$(MAKE) joomla-install-extension
 	$(MAKE) joomla-enable-debug
+	$(MAKE) joomla-increase-session-timeout
 	$(MAKE) joomla-db-enable-extension
+	$(MAKE) joomla-install-jed-checker
 
 
 joomla-install-if-not-installed:
@@ -93,6 +106,7 @@ extension-zip:
 	mkdir -p dist
 	zip -r dist/exmenu.zip \
 		mod_exmenu.* \
+		helper.php \
 		exmenu \
 		LICENSE
 

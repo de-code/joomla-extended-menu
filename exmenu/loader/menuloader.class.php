@@ -7,10 +7,14 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
+defined('_JEXEC') or die();
+
 // no direct access
 if (!defined('EXTENDED_MENU_HOME')) {
 	die('Restricted access');
 }
+
+use Joomla\Registry\Registry;
 
 /**
  * Loads a menu but does not render it.
@@ -117,15 +121,7 @@ class AbstractExtendedMenuLoader extends AbstractExtendedMenuDatabaseHelper {
 	 * @since 1.0.5
 	 */
 	function getParsedParameters($text) {
-		$result = NULL;
-		if (class_exists('JRegistry')) {
-			$result = new JRegistry($text);
-		} else if (class_exists('JParameter')) {
-			$result = new JParameter($text);
-		} else {
-			$result = new mosParameters($text);
-		}
-		return $result;
+		return new Registry($text);
 	}
 
 

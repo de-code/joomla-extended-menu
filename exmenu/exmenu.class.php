@@ -7,7 +7,7 @@
 * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
 */
 
-defined('_VALID_MOS') or defined('_JEXEC') or die('Restricted access.');
+defined('_JEXEC') or die();
 
 if (!defined('EXTENDED_MENU_HOME')) {
 	define('EXTENDED_MENU_HOME', dirname(__FILE__));

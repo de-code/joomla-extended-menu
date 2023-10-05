@@ -9,28 +9,7 @@
 * Beside this it were havily redesigned to separate module from view.
 */
 
-if ((!defined('_VALID_MOS')) && (!defined('_JEXEC'))) {
-	if (isset($_POST['url'])) {
-		// redirect to url (used for select list)
-		$url	= $_POST['url'];
-		if (get_magic_quotes_gpc()) {
-			$url = stripslashes($url);
-		}
-
-		if ($url != '') {
-			if (headers_sent()) {
-				echo '<script>document.location.href=\''.$url.'\';</script>'."\n";
-			} else {
-				header('HTTP/1.1 301 Moved Permanently');
-				header('Location: '.$url);
-			}
-			exit();
-		}
-	}
-
-	/** ensure this file is being included by a parent file */
-	die('Restricted access.');
-}
+defined('_JEXEC') or die();
 
 // requested module allows to include other modules without immediately displaying them
 if (!isset($requestedModule)) {
