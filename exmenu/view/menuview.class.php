@@ -15,6 +15,7 @@ if (!defined('EXTENDED_MENU_HOME')) {
 }
 
 use Joomla\Registry\Registry;
+use Joomla\Component\Content\Site\Helper\RouteHelper;
 
 
 /**
@@ -200,7 +201,7 @@ class AbstractExtendedMenuView {
 						$contentId = $temp[1];
 						if (function_exists('jimport')) {
 							require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
-							$menuNode->link = ContentHelperRoute::getArticleRoute(
+							$menuNode->link = RouteHelper::getArticleRoute(
 									$contentId, $menuNode->getCategoryId(), $menuNode->getSectionId());
 							$gotFinalLink = FALSE;
 							$id = FALSE;
