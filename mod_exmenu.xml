@@ -17,6 +17,9 @@
 	(If you like this module please consider a <a href="http://de.siteof.de/donate.html">donation</a>.)
 	]]>
 	</description>
+	<updateservers>
+		<server type="extension" name="Extended Menu Updates">https://raw.githubusercontent.com/de-code/joomla-extended-menu/576c60e0a56ee3d337a32dbdd14295968d34cde8/updates.xml</server>
+	</updateservers>
 	<files>
 		<filename module="mod_exmenu">mod_exmenu.php</filename>
 		<filename>exmenu/exmenu.class.php</filename>
