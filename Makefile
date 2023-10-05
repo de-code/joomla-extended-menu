@@ -1,5 +1,5 @@
 # See https://docs.joomla.org/J4.x:Joomla_CLI_Installation
-joomla-install:
+joomla-install-core:
 	@echo "installing joomla..."
 	docker-compose exec -T joomla \
 		php installation/joomla.php install \
@@ -40,6 +40,13 @@ joomla-db-enable-extension:
 		-u root \
 		-pdb_root_password \
 		--database=joomla_db
+
+
+joomla-install:
+	$(MAKE) joomla-install-core
+	$(MAKE) joomla-install-extension
+	$(MAKE) joomla-enable-debug
+	$(MAKE) joomla-db-enable-extension
 
 
 joomla-install-if-not-installed:
