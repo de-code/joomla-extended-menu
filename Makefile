@@ -78,6 +78,10 @@ joomla-start-and-wait:
 	$(MAKE) joomla-install-if-not-installed
 
 
+stop:
+	docker-compose down
+
+
 extension-zip:
 	mkdir -p dist
 	zip -r dist/exmenu.zip \
