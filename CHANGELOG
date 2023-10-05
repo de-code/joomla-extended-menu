@@ -11,6 +11,9 @@ Legend:
 - -> Removed
 ! -> Note
 
+1.3.1 2023-10-05 / Daniel Ecer
+# Fixed JED linting; Replaced backwards compatibility to older versions.
+
 1.3.0 2023-10-05 / Daniel Ecer
 # Joomla 4.x: Fixed compatibility issues with Joomla 4.x
 
