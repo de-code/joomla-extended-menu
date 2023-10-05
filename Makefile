@@ -49,6 +49,7 @@ joomla-link-extension-source:
 
 
 joomla-install:
+	$(MAKE) extension-zip
 	$(MAKE) joomla-install-core
 	$(MAKE) joomla-install-extension
 	$(MAKE) joomla-enable-debug
