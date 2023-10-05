@@ -31,12 +31,17 @@ class de_siteof_exmenu_SiteHelper {
 			$version = new JVersion();
 			$application = JFactory::getApplication();
 			$this->_joomla15 = TRUE;
-			$this->_joomla16 = ($version->RELEASE >= '1.6');
-			$this->_joomla30 = ($version->RELEASE >= '3.0');
+			$this->_joomla16 = ($version->getShortVersion() >= '1.6');
+			$this->_joomla30 = ($version->getShortVersion() >= '3.0');
+            $this->_joomla40 = ($version->getShortVersion() >= '4.0');
 			$this->_absolutePath = JPATH_SITE;
 			$this->_rootUri = JURI::root();
 			$this->_siteTemplate = ''.$application->getTemplate();
-			$this->_currentMenuId = JRequest::getInt('Itemid');
+            if ($this->_joomla40) {
+                $this->_currentMenuId = $application->getInput()->getInt('Itemid');
+            } else {
+			    $this->_currentMenuId = JRequest::getInt('Itemid');
+            }
 		} else {
 			$this->_absolutePath = $GLOBALS['mosConfig_absolute_path'];
 			$this->_rootUri = $GLOBALS['mosConfig_live_site'];

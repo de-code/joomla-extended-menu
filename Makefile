@@ -44,8 +44,10 @@ joomla-db-enable-extension:
 
 joomla-link-extension-source:
 	docker-compose exec -T joomla \
+		bash -c '\
 		mv ./modules/mod_exmenu ./modules/mod_exmenu.orig \
-		&& ln --symbolic /source /var/www/html/modules/mod_exmenu
+		&& ln --symbolic /source /var/www/html/modules/mod_exmenu \
+		'
 
 
 joomla-install:
@@ -76,6 +78,11 @@ joomla-start-and-wait:
 	docker-compose up -d
 	$(MAKE) joomla-wait-for-port-available
 	$(MAKE) joomla-install-if-not-installed
+
+
+joomla-check-site-okay:
+	docker-compose exec -T joomla \
+		curl --fail --output /dev/null http://localhost:80
 
 
 stop:

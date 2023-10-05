@@ -18,5 +18,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup and start
         run: make joomla-start-and-wait
+      - name: Check Site Okay (with installed extension)
+        run: make joomla-check-site-okay
       - name: Stop
         run: make stop

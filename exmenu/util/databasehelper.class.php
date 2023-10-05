@@ -55,6 +55,10 @@ class AbstractExtendedMenuDatabaseHelper {
 
 	function checkDatabaseError($msg = '') {
 		$database = $this->getDatabase();
+        if (!method_exists($database, 'getErrorNum')) {
+            // No need to check. It will use exception handing instead.
+            return FALSE;
+        }
 		if ($database->getErrorNum()) {
 			if ($msg == '') {
 				$msg = 'database error:'.stripslashes($database->getErrorMsg());
