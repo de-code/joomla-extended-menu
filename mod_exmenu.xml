@@ -22,7 +22,8 @@
 	</updateservers>
 	<files>
 		<filename module="mod_exmenu">mod_exmenu.php</filename>
-		<filename>exmenu/exmenu.class.php</filename>
+		<filename>helper.php</filename>
+        <filename>exmenu/exmenu.class.php</filename>
 		<filename>exmenu/loader/autoexpandedmenu.menuloader.class.php</filename>
 		<filename>exmenu/loader/category.menuloader.class.php</filename>
 		<filename>exmenu/loader/contentitem.menuloader.class.php</filename>

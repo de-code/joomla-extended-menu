@@ -106,6 +106,7 @@ extension-zip:
 	mkdir -p dist
 	zip -r dist/exmenu.zip \
 		mod_exmenu.* \
+		helper.php \
 		exmenu \
 		LICENSE
 
