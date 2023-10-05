@@ -27,6 +27,11 @@ joomla-enable-debug:
 		php cli/joomla.php config:set debug=true
 
 
+joomla-increase-session-timeout:
+	docker-compose exec -T joomla \
+		php cli/joomla.php config:set lifetime=60
+
+
 joomla-db-shell:
 	docker-compose exec joomladb mysql \
 		-u root \
@@ -61,6 +66,7 @@ joomla-install:
 	$(MAKE) joomla-install-core
 	$(MAKE) joomla-install-extension
 	$(MAKE) joomla-enable-debug
+	$(MAKE) joomla-increase-session-timeout
 	$(MAKE) joomla-db-enable-extension
 	$(MAKE) joomla-install-jed-checker
 
