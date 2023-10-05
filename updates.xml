@@ -5,6 +5,19 @@
 		<description>Extended Menu for Joomla</description>
 		<element>mod_exmenu</element>
 		<type>module</type>
+		<version>1.3.1</version>
+		<client>site</client>
+		<infourl title="Extended Menu">https://github.com/de-code/joomla-extended-menu/releases/tag/v1.3.1</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/de-code/joomla-extended-menu/releases/download/v1.3.1/mod_exmenu-v1.3.1.zip</downloadurl>
+		</downloads>
+		<targetplatform name="joomla" version="(3\.[012345])|(4\.[012345]))" />
+	</update>
+	<update>
+		<name>Extended Menu</name>
+		<description>Extended Menu for Joomla</description>
+		<element>mod_exmenu</element>
+		<type>module</type>
 		<version>1.3.0</version>
 		<client>site</client>
 		<infourl title="Extended Menu">https://github.com/de-code/joomla-extended-menu/releases/tag/v1.3.0</infourl>
