@@ -1,3 +1,4 @@
+# See https://docs.joomla.org/J4.x:Joomla_CLI_Installation
 joomla-install:
 	@echo "installing joomla..."
 	docker-compose exec -T joomla \
@@ -10,7 +11,9 @@ joomla-install:
 		--admin-email=admin@example.org \
 		--db-host=joomladb \
 		--db-user=root \
-		--db-pass=db_root_password
+		--db-pass=db_root_password \
+		--db-name=joomla_db \
+		--db-prefix=test_
 
 
 joomla-install-extension:
@@ -22,6 +25,21 @@ joomla-install-extension:
 joomla-enable-debug:
 	docker-compose exec -T joomla \
 		php cli/joomla.php config:set debug=true
+
+
+joomla-db-shell:
+	docker-compose exec joomladb mysql \
+		-u root \
+		-pdb_root_password \
+		--database=joomla_db
+
+
+joomla-db-enable-extension:
+	cat ./sql/enable-mod-exmenu.sql \
+	| docker-compose exec -T joomladb mysql \
+		-u root \
+		-pdb_root_password \
+		--database=joomla_db
 
 
 joomla-install-if-not-installed:
