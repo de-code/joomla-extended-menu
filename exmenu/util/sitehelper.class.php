@@ -16,7 +16,7 @@ if (!defined('EXTENDED_MENU_HOME')) {
 
 
 use Joomla\CMS\Factory;
-
+use Joomla\CMS\Version;
 
 class de_siteof_exmenu_SiteHelper {
 
@@ -33,7 +33,7 @@ class de_siteof_exmenu_SiteHelper {
 
 	private function __construct() {
 		if (function_exists('jimport')) {
-			$version = new JVersion();
+			$version = new Version();
 			$application = Factory::getApplication();
 			$this->_joomla15 = TRUE;
 			$this->_joomla16 = ($version->getShortVersion() >= '1.6');
