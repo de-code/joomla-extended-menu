@@ -80,6 +80,11 @@ joomla-start-and-wait:
 	$(MAKE) joomla-install-if-not-installed
 
 
+joomla-check-site-okay:
+	docker-compose exec -T joomla \
+		curl --fail http://localhost:80
+
+
 stop:
 	docker-compose down
 
