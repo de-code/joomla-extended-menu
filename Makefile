@@ -50,12 +50,19 @@ joomla-link-extension-source:
 		'
 
 
+joomla-install-jed-checker:
+	docker-compose exec -T joomla \
+		php cli/joomla.php extension:install \
+		--url=https://github.com/joomla-extensions/jedchecker/archive/refs/tags/2.4.3.zip
+
+
 joomla-install:
 	$(MAKE) extension-zip
 	$(MAKE) joomla-install-core
 	$(MAKE) joomla-install-extension
 	$(MAKE) joomla-enable-debug
 	$(MAKE) joomla-db-enable-extension
+	$(MAKE) joomla-install-jed-checker
 
 
 joomla-install-if-not-installed:
