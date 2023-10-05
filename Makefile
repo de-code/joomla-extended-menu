@@ -44,8 +44,10 @@ joomla-db-enable-extension:
 
 joomla-link-extension-source:
 	docker-compose exec -T joomla \
+		bash -c '\
 		mv ./modules/mod_exmenu ./modules/mod_exmenu.orig \
-		&& ln --symbolic /source /var/www/html/modules/mod_exmenu
+		&& ln --symbolic /source /var/www/html/modules/mod_exmenu \
+		'
 
 
 joomla-install:
